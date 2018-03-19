@@ -66,11 +66,11 @@ class DrinkController extends ResponseController
     {
         $validator = Validator::make($request->all(), [
             'friendId' => 'exists:users,id', // Not sure what do, is it for gift to friend?
-            'locationId' => 'required|exists:locations,id',
-            'drinkId' => 'exists:drinks,id',
-            'coverId' => 'exists:covers,id',
+            'locationId' => 'exists:locations,id',
+            'drinkId' => 'required_without:coverId',
+            'coverId' => 'required_without:drinkId',
             'quantity' => 'required|numeric',
-            'message'  => 'required'
+            'message'  => ''
         ]);
 
         if ($validator->fails()) {
